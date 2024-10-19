@@ -1,38 +1,21 @@
-import java.util.Scanner;
+public class p2 {
 
-import java.util.*;
-
-public class booth
-{
     public static void main(String args[])
     {
-        Scanner input = new Scanner(System.in);
-      
-        System.out.print("Enter n1 : ");
-        int n1 = input.nextInt();
+        int n1=10;
+        int n2=10;
+        int product=0;
 
-        System.out.print("Enter n2 : ");
-        int n2 = input.nextInt();
+        int bits = Integer.toBinaryString(n1).length();
 
-        int m = n1;
-        int r = n2;
-        int a = n1;
-        int s = -n1;
-        int p = 0;
-        int count = Integer.SIZE;
-
-        while(count>0)
+        for(int i=0;i<bits;i++)
         {
-            if((r & 1)==1)
-            {
-                p+=a;
-                s+=m;
-            }
-            a<<=1;
-            s<<=1;
-            count--;
-            r>>=1;
+            int cb = (n1 & 0b1);
+            if(cb==1)
+                product+=n2;
+            n1>>>=1;
+            n2<<=1;
         }
-        System.out.println(p);   
+        System.out.println(product);
     }
 }
