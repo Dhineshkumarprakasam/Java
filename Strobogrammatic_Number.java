@@ -1,65 +1,44 @@
 import java.util.*;
-public class strobo2
-{
-    static char find(char val)
+public class strobo{
+
+    static boolean check(String value)
     {
-        if(val=='0')
-            return '0';
-        else if(val=='1')
-            return '1';
-        else if(val=='9')
-            return '6';
-        else if(val=='6')
-            return '9';
-        else if(val=='8')
-            return '8';
-        else
-            return '-';
-    }
+        Map<Character,Character> map = new HashMap<>();
+        map.put('1','1');
+        map.put('0','0');
+        map.put('6','9');
+        map.put('8','8');
+        map.put('9','6');
 
-    static boolean check(String number)
-    {
 
-        String strobed="";
-        String reverse="";
+        StringBuilder topBottom = new StringBuilder();
 
-        for(int i=0;i<number.length();i++)
+        for(int i=0;i<value.length();i++)
         {
-            if(find(number.charAt(i))=='-')
+            char oppositeValue = map.getOrDefault(value.charAt(i),'-');
+            if(oppositeValue=='-')
                 return false;
-            strobed+=find(number.charAt(i));
+            else
+                topBottom.append(oppositeValue);
         }
-        
-        for(int i=strobed.length()-1;i>=0;i--)
-            reverse+=strobed.charAt(i);
-        
-        if(number.equals(reverse))
+
+        topBottom.reverse();
+
+        if(value.equals(topBottom.toString()))
             return true;
         return false;
     }
-
     public static void main(String args[])
     {
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter no.of Digits : ");
-        int n = input.nextInt();
 
-        int start=1;
-        int end=1;
+        System.out.print("Enter number : ");
+        String value = input.nextLine();
 
-        start=start*(int)Math.pow(10,n-1);
-        end=end*(int)Math.pow(10,n);
-
-        ArrayList<String> result = new ArrayList<>();
-        for(int i=start;i<end;i++)
-        {
-            String number = String.valueOf(i);
-            if(check(number)==true)
-                result.add(number);
-        }
-
-        System.out.println(result);
-        
-
+        boolean ans = check(value);
+        if(ans==true)
+            System.out.println("yes");
+        else
+            System.out.println("no");
     }
 }
