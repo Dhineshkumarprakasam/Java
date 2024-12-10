@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class swap {
+public class swap_nibbles {
     public static void main(String args[])
     {
         Scanner sc = new Scanner(System.in);
