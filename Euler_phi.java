@@ -3,9 +3,8 @@ public class Euler {
     static int gcd(int a, int b)
     {
         if(a==0)
-        {
             return b;
-        }
+        
         return gcd(b%a,a);
     }
 
@@ -15,9 +14,7 @@ public class Euler {
         for(int i=2;i<n;i++)
         {
             if(gcd(i,n)==1)
-            {
                 result++;
-            }
         }
         return result;
     }
