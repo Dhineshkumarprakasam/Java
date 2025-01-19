@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class t3
+public class Celebrity_Problem
 {
     public static int find()
     {
