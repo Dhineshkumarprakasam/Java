@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class LongestCommonSubsequence
+public class lcs
 {
     public static void main(String args[])
     {
@@ -25,5 +25,27 @@ public class LongestCommonSubsequence
         }
 
         System.out.println("The LCS : "+lcs[n][m]);
+
+        //print the sequence
+
+        ArrayList<Character> ans = new ArrayList<>();
+        int i=n,j=m;
+        while(i>0 && j>0)
+        {
+            if(a.charAt(i-1)==b.charAt(j-1))
+            {
+                ans.add(a.charAt(i-1));
+                i--;
+                j--;
+            }
+            else if(lcs[i][j-1]>=lcs[i-1][j])
+            {
+                j--;
+            }
+            else
+                i--; 
+        }
+
+        System.out.println(ans);
     }
 }
