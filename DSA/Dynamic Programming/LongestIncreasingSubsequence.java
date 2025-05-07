@@ -1,48 +1,39 @@
 import java.util.*;
-
-public class LongestIncreasingSubsequence
-{
+public class LongestIncreasingSubsequence{
     public static void main(String[] args) {
+        int arr[] = {10, 22, 9, 33, 21, 50, 41, 60 };
+        int n = arr.length;
+        int lis[] = new int[n];
+        int prev[]=new int[n];
+
+        Arrays.fill(lis,1);
+        Arrays.fill(prev,-1);
         
-        ArrayList<Integer> arr = new ArrayList<>(Arrays.asList(5,4,11,1,16,8));
-        int n = arr.size();
-
-        int dp[] = new int[n];
-        int prev[] = new int[n];
-
-        Arrays.fill(dp,1);
-        Arrays.fill(prev, -1);
-
-        for(int i=0;i<n;i++)
+        for(int i=1;i<n;i++)
         {
             for(int j=0;j<i;j++)
             {
-                if(arr.get(j)<arr.get(i) && dp[i]<1+dp[j])
+                if(arr[i]>arr[j] && lis[i]<lis[j]+1)
                 {
-                    dp[i]=1+dp[j];
+                    lis[i]=lis[j]+1;
                     prev[i]=j;
                 }
             }
         }
 
-        int max=1,index=0;
+        int maxi=0;
         for(int i=0;i<n;i++)
+            if(lis[i]>lis[maxi])
+                maxi=i;
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        while(maxi!=-1)
         {
-            if(dp[i]>max)
-            {
-                max=dp[i];
-                index=i;
-            }
+            ans.add(arr[maxi]);
+            maxi=prev[maxi];
         }
 
-        ArrayList<Integer> seq = new ArrayList<>();
-        while(index!=-1)
-        {
-            seq.add(arr.get(index));
-            index=prev[index];
-        }
-
-        System.out.println("Length : "+max);
-        System.out.println("Sequence : "+seq.reversed());
+        Collections.reverse(ans);
+        System.out.println(ans);
     }
 }
